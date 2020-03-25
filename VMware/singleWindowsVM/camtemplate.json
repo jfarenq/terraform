@@ -1,5 +1,5 @@
 {
-  "name": "ICC SingleWindowsVirtualMachine",
+  "name": "ICC Windows SingleVirtualMachine",
   "description": "Create ICC Windows Virtual Machine with single vnic",
   "type": "prebuilt",
   "version": "1.0",
@@ -20,7 +20,7 @@
     }
   },
   "metadata": {
-      "displayName": "ICC SingleWindowsVirtualMachine",
+      "displayName": "ICC Windows SingleVirtualMachine",
       "longDescription": "Create Windows Virtual Machine with single vnic on a network label by cloning",
       "bullets": [
        {
@@ -29,7 +29,7 @@
        },
        {
          "title": "Topology",
-         "description": "ICC Single windows virtual machine"
+         "description": "ICC Single Windows virtual machine"
        },
        {
          "title": "Default ICC Windows Virtual Machine settings",
