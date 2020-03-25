@@ -155,7 +155,7 @@
     },
     {
       "name": "vm_name",
-      "default": "iccwinvm-1",
+      "default": ["iccwinvm-1"],
       "type": "list",
       "required": true,
       "secured": false,
