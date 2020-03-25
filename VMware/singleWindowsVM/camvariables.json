@@ -182,6 +182,17 @@
       "required": true,
       "secured": false,
       "label": "vm_template",
+      "options": [
+        {
+          "value": "win2016tplcam",
+          "label": "Windows 2016"
+        },
+        {
+          "value": "win2019tplcam",
+          "label": "Windows 2019",
+          "default": "true"
+        }
+      ],
       "hidden": false,
       "immutable": false
     },
