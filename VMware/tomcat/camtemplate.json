@@ -1,5 +1,5 @@
 {
-   "name": "Tomcat on a Single VM",
+   "name": "ICC Tomcat on a Single VM",
    "description": "Tomcat - An Easy starting point for Java web development.",
    "version": "1.0",
    "type": "prebuilt",
@@ -15,12 +15,12 @@
     "template_source": {
       "githubRepoUrl": "",
       "githubAccessToken": "",
-      "relativePathToTemplateFolder": "VMware/terraform/hcl/tomcat",
+      "relativePathToTemplateFolder": "VMware/tomcat",
       "templateFileName": "tomcat.tf"
     }
    },
    "metadata": {
-     "displayName": "Tomcat on a Single VM",
+     "displayName": "ICC Tomcat on a Single VM",
      "longDescription": "Deploys a single node of Tomcat in VMware for development use, where Tomcat is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies.",
      "bullets": [
        {
