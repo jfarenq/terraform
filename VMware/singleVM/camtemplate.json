@@ -1,5 +1,5 @@
 {
-  "name": "SingleVirtualMachine",
+  "name": "ICC Linux SingleVirtualMachine",
   "description": "Create Virtual Machine with single vnic",
   "type": "prebuilt",
   "version": "1.0",
@@ -20,7 +20,7 @@
     }
   },
   "metadata": {
-      "displayName": "SingleVirtualMachine",
+      "displayName": "ICC Linux SingleVirtualMachine",
       "longDescription": "Create Virtual Machine with single vnic on a network label by cloning",
       "bullets": [
        {
@@ -29,15 +29,15 @@
        },
        {
          "title": "Topology",
-         "description": "Single virtual machine"
+         "description": "ICC Linux Single virtual machine"
        },
        {
-         "title": "Default Virtual Machine settings",
-         "description": "Standard machine type with 1 virtual CPU and 2 GB of memory."
+         "title": "Default ICC Linux Virtual Machine settings",
+         "description": "Standard Linux machine type with 1 virtual CPU and 2 GB of memory."
        },
        {
          "title": "Usage and special notes",
-         "description": "A typical deployment takes < 1 minute."
+         "description": "A typical deployment takes < 3 minute."
        }
       ]
   }
