@@ -194,7 +194,7 @@
       "options": [
         {
           "value": "thin",
-          "label": "Thin Provision"
+          "label": "Thin Provision",
           "default": "true"
         },
         {
