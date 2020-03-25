@@ -1,201 +1,211 @@
-# This is a terraform generated template generated from blueprint89
-
-##############################################################
-# Keys - CAMC (public/private) & optional User Key (public) 
-##############################################################
-variable "allow_unverified_ssl" {
-  description = "Communication with vsphere server with self signed certificate"
-  default     = "true"
-}
-
-##############################################################
-# Define the vsphere provider 
-##############################################################
+# Configure the VMware vSphere Provider
 provider "vsphere" {
-  allow_unverified_ssl = "${var.allow_unverified_ssl}"
-  version              = "~> 1.3"
+ # user = "${var.vsphere_user}"
+ # password = "${var.vsphere_password}"
+ # vsphere_server = "${var.vsphere_server}"
+  version = "= 1.3.3"
+  allow_unverified_ssl = "true"
 }
 
-provider "camc" {
-  version = "~> 0.2"
+/*variable "vsphere_server"{
+  description = "vCenter IP"
 }
+
+variable "vsphere_user"{
+  description = "vCenter user ID"
+}
+
+variable "vsphere_password"{
+  description = "vCenter login password"
+}*/
 
 ##############################################################
-# Define pattern variables 
+# Vsphere data for provider 
 ##############################################################
-
-##############################################################
-# Vsphere data for provider
-##############################################################
-data "vsphere_datacenter" "vm_1_datacenter" {
-  name = "${var.vm_1_datacenter}"
+data "vsphere_datacenter" "vsphere_datacenter" {
+  name = "${var.vsphere_datacenter}"
+}
+data "vsphere_datastore" "vsphere_datastore" {
+  name = "${var.vm_disk1_datastore}"
+  datacenter_id = "${data.vsphere_datacenter.vsphere_datacenter.id}"
+}
+data "vsphere_resource_pool" "vsphere_resource_pool" {
+  name = "${var.vsphere_resource_pool}"
+  datacenter_id = "${data.vsphere_datacenter.vsphere_datacenter.id}"
+}
+data "vsphere_network" "vm_network" {
+  name = "${var.vm_network_interface_label}"
+  datacenter_id = "${data.vsphere_datacenter.vsphere_datacenter.id}"
 }
 
-data "vsphere_datastore" "vm_1_datastore" {
-  name          = "${var.vm_1_root_disk_datastore}"
-  datacenter_id = "${data.vsphere_datacenter.vm_1_datacenter.id}"
-}
-
-data "vsphere_resource_pool" "vm_1_resource_pool" {
-  name          = "${var.vm_1_resource_pool}"
-  datacenter_id = "${data.vsphere_datacenter.vm_1_datacenter.id}"
-}
-
-data "vsphere_network" "vm_1_network" {
-  name          = "${var.vm_1_network_interface_label}"
-  datacenter_id = "${data.vsphere_datacenter.vm_1_datacenter.id}"
-}
-
-data "vsphere_virtual_machine" "vm_1_template" {
-  name          = "${var.vm_1-image}"
-  datacenter_id = "${data.vsphere_datacenter.vm_1_datacenter.id}"
-}
-
-##### Image Parameters variables #####
-
-#Variable : vm_1_name
-variable "vm_1_name" {
-  type        = "string"
-  description = "Generated"
-  default     = "vm_1"
+data "vsphere_virtual_machine" "vm_template" {
+  name = "${var.vm_template}"
+  datacenter_id = "${data.vsphere_datacenter.vsphere_datacenter.id}"
 }
 
 #########################################################
-##### Resource : vm_1
+##### Resource : vm_Inout variable
 #########################################################
 
-variable "vm_1_folder" {
+variable "enable_vm" { 
+  type = "string"
+  default = "true"
+}
+
+variable "vm_name" {
+  type = "list"
+}
+
+#
+variable "hostName" {
+  description = "VM hostanme"
+  type = "list"
+}
+
+variable "vm_vcpu" {
+  description = "VM Vcpu count"
+  default = "2"
+}
+
+variable "vm_memory" {
+  description = "VM memory"
+}
+
+variable "admin_password" {
+  description = "Windows admin password"
+}
+
+variable "vm_folder" {
   description = "Target vSphere folder for virtual machine"
 }
 
-variable "vm_1_datacenter" {
+variable "vm_template" {
+  description = "Target vSphere folder for virtual machine"
+}
+
+variable "vsphere_datacenter" {
   description = "Target vSphere datacenter for virtual machine creation"
 }
 
-variable "vm_1_domain" {
-  description = "Domain Name of virtual machine"
-}
-
-variable "vm_1_number_of_vcpu" {
-  description = "Number of virtual CPU for the virtual machine, which is required to be a positive Integer"
-  default     = "1"
-}
-
-variable "vm_1_memory" {
-  description = "Memory assigned to the virtual machine in megabytes. This value is required to be an increment of 1024"
-  default     = "1024"
-}
-
-variable "vm_1_cluster" {
-  description = "Target vSphere cluster to host the virtual machine"
-}
-
-variable "vm_1_resource_pool" {
+variable "vsphere_resource_pool" {
   description = "Target vSphere Resource Pool to host the virtual machine"
 }
 
-variable "vm_1_dns_suffixes" {
-  type        = "list"
-  description = "Name resolution suffixes for the virtual network adapter"
-}
-
-variable "vm_1_dns_servers" {
-  type        = "list"
+variable "vm_dns_servers" {
+  type = "list"
   description = "DNS servers for the virtual network adapter"
 }
 
-variable "vm_1_network_interface_label" {
+variable "vm_network_interface_label" {
   description = "vSphere port group or network label for virtual machine's vNIC"
+  default = "VM Network"
 }
 
-variable "vm_1_ipv4_gateway" {
+variable "vm_ipv4_gateway" {
   description = "IPv4 gateway for vNIC configuration"
 }
 
-variable "vm_1_ipv4_address" {
+variable "vm_ipv4_address" {
+  default = []
   description = "IPv4 address for vNIC configuration"
+  type = "list"
 }
 
-variable "vm_1_ipv4_prefix_length" {
+variable "vm_ipv4_prefix_length" {
   description = "IPv4 prefix length for vNIC configuration. The value must be a number between 8 and 32"
 }
 
-variable "vm_1_adapter_type" {
+variable "vm_adapter_type" {
   description = "Network adapter type for vNIC Configuration"
-  default     = "vmxnet3"
+  default = "vmxnet3"
 }
 
-variable "vm_1_root_disk_datastore" {
+
+variable "vm_disk1_size" {
+  description = "Size of template disk volume"
+}
+
+variable "vm_disk1_keep_on_remove" {
+  type = "string"
+  description = "Delete template disk volume when the virtual machine is deleted"
+  default = "false"
+}
+
+variable "vm_disk1_datastore" {
   description = "Data store or storage cluster name for target virtual machine's disks"
 }
 
-variable "vm_1_root_disk_type" {
-  type        = "string"
-  description = "Type of template disk volume"
-  default     = "eager_zeroed"
+variable "dependsOn" {
+  default = "true"
+  description = "Boolean for dependency"
 }
 
-variable "vm_1_root_disk_controller_type" {
-  type        = "string"
-  description = "Type of template disk controller"
-  default     = "scsi"
+######################
+# Output Variable
+output "address" {
+  value = "${vsphere_virtual_machine.Win-vm.*.clone.0.customize.0.network_interface.0.ipv4_address}"
+  }
+
+############ Resource block
+resource "null_resource" "dependsOn" {
+  provisioner "local-exec" {
+    command = "echo '================= dependsOn ${var.dependsOn} ================'"
+  }
 }
 
-variable "vm_1_root_disk_keep_on_remove" {
-  type        = "string"
-  description = "Delete template disk volume when the virtual machine is deleted"
-  default     = "false"
-}
+resource "vsphere_virtual_machine" "Win-vm" {
+  depends_on = ["null_resource.dependsOn"]
 
-variable "vm_1_root_disk_size" {
-  description = "Size of template disk volume. Should be equal to template's disk size"
-  default     = "25"
-}
+  count = "${ var.enable_vm == "true" ? length(var.vm_ipv4_address) : 0}"
 
-variable "vm_1-image" {
-  description = "Operating system image id / template that should be used when creating the virtual image"
-}
-
-# vsphere vm
-resource "vsphere_virtual_machine" "vm_1" {
-  name             = "${var.vm_1_name}"
-  folder           = "${var.vm_1_folder}"
-  num_cpus         = "${var.vm_1_number_of_vcpu}"
-  memory           = "${var.vm_1_memory}"
-  resource_pool_id = "${data.vsphere_resource_pool.vm_1_resource_pool.id}"
-  datastore_id     = "${data.vsphere_datastore.vm_1_datastore.id}"
-  guest_id         = "${data.vsphere_virtual_machine.vm_1_template.guest_id}"
-  scsi_type        = "${data.vsphere_virtual_machine.vm_1_template.scsi_type}"
+  name             = "${var.vm_name[count.index]}"
+  folder           = "${var.vm_folder}"
+  num_cpus         = "${var.vm_vcpu}"
+  memory           = "${var.vm_memory}"
+  resource_pool_id = "${data.vsphere_resource_pool.vsphere_resource_pool.id}"
+  datastore_id     = "${data.vsphere_datastore.vsphere_datastore.id}"
+  guest_id         = "${data.vsphere_virtual_machine.vm_template.guest_id}"
+  scsi_type        = "${data.vsphere_virtual_machine.vm_template.scsi_type}"
 
   clone {
-    template_uuid = "${data.vsphere_virtual_machine.vm_1_template.id}"
+    template_uuid = "${data.vsphere_virtual_machine.vm_template.id}"
 
     customize {
-      linux_options {
-        domain    = "${var.vm_1_domain}"
-        host_name = "${var.vm_1_name}"
-      }
-
+      windows_options {
+              computer_name  = "${element(var.hostName, count.index)}"
+              workgroup      = "workgroup"
+              admin_password = "${var.admin_password}"
+              auto_logon = true
+              auto_logon_count = 1
+            }
       network_interface {
-        ipv4_address = "${var.vm_1_ipv4_address}"
-        ipv4_netmask = "${var.vm_1_ipv4_prefix_length}"
+        ipv4_address = "${var.vm_ipv4_address[count.index]}"
+        ipv4_netmask = "${var.vm_ipv4_prefix_length}"
       }
 
-      ipv4_gateway    = "${var.vm_1_ipv4_gateway}"
-      dns_suffix_list = "${var.vm_1_dns_suffixes}"
-      dns_server_list = "${var.vm_1_dns_servers}"
+      ipv4_gateway    = "${var.vm_ipv4_gateway}"
+      dns_server_list = "${var.vm_dns_servers}"
     }
   }
 
   network_interface {
-    network_id   = "${data.vsphere_network.vm_1_network.id}"
-    adapter_type = "${var.vm_1_adapter_type}"
+    network_id   = "${data.vsphere_network.vm_network.id}"
+    adapter_type = "${var.vm_adapter_type}"
   }
 
   disk {
-    label          = "${var.vm_1_name}0.vmdk"
-    size           = "${var.vm_1_root_disk_size}"
-    keep_on_remove = "${var.vm_1_root_disk_keep_on_remove}"
-    datastore_id   = "${data.vsphere_datastore.vm_1_datastore.id}"
+    label          = "${var.vm_name[count.index]}.vmdk"
+    size           = "${var.vm_disk1_size}"
+    keep_on_remove = "${var.vm_disk1_keep_on_remove}"
+    datastore_id   = "${data.vsphere_datastore.vsphere_datastore.id}"
+    thin_provisioned  = "true"
+  }
+}
+  
+resource "null_resource" "Win-vm-create_done" {
+  depends_on = ["vsphere_virtual_machine.Win-vm"]
+
+  provisioner "local-exec" {
+    command = "echo '===================== Windows VM creates done for ${var.vm_name[count.index]} ==================X .'"
   }
 }
