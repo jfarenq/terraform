@@ -167,7 +167,7 @@
       "name": "tomcat_vm-image",
       "type": "string",
       "description": "Operating system image id / template that should be used when creating the virtual image",
-      "default": "CentOS7tplcam",
+      "default": "RHEL7tplcam",
       "hidden": false,
       "label": "Operating System ID / Template - tomcat_vm",
       "secured": false,
@@ -176,12 +176,12 @@
       "options": [
         {
           "value": "RHEL7tplcam",
-          "label": "RHEL 7.7"
+          "label": "RHEL 7.7",
+          "default": "true"
         },
         {
           "value": "CentOS7tplcam",
-          "label": "CentOS 7.7",
-          "default": "true"
+          "label": "CentOS 7.7"
         }
       ],
       "group_name": "virtualmachine"
