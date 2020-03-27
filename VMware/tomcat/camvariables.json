@@ -291,7 +291,7 @@
     },
     {
       "name": "tomcat_vm_ipv4_address",
-      "type": "string",
+      "type": "list",
       "description": "IPv4 address for vNIC configuration",
       "hidden": false,
       "label": "Virtual Machine IP Address - tomcat_vm",
