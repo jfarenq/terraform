@@ -298,6 +298,20 @@
       "secured": false,
       "required": true,
       "immutable": false,
+      "options": [
+        {
+          "value": "10.3.44.39",
+          "label": "10.3.44.39",
+        },
+        {
+          "value": "10.3.44.40",
+          "label": "10.3.44.40"
+        },
+        {
+          "value": "10.3.44.41",
+          "label": "10.3.44.41"
+        }
+      ],
       "group_name": "virtualmachine"
     },
     {
