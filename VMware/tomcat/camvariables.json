@@ -377,6 +377,7 @@
       "name": "tomcat_pwd",
       "label": "Tomcat User Password",
       "description": "Password of user to manage tomcat via GUI; Allow 8 to 16 alphanumeric characters",
+      "default": "bonjour",
       "hidden": false,
       "immutable": false,
       "required": true,
@@ -425,7 +426,7 @@
         },
         {
           "value": "e1000",
-          "default": "e1000"
+          "label": "e1000"
         }
       ],
       "required": true,
