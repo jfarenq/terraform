@@ -460,6 +460,7 @@
         "name": "ssh_user_password",
         "label": "SSH User Password",
         "description": "The user password for ssh connection, which is default in template",
+        "default": "Ibm4CPAK!",
         "hidden": false,
         "immutable": false,
         "required": true,
