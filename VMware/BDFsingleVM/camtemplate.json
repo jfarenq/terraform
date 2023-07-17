@@ -1,5 +1,5 @@
 {
-    "name": "SingleVirtualMachine for Terraform 1.x.x",
+    "name": "ICC SingleVirtualMachine",
     "description": "Create Virtual Machine with single vnic",
     "type": "prebuilt",
     "version": "2.5",
