@@ -132,7 +132,8 @@ variable "vm_1_root_disk_datastore" {
 variable "vm_1_root_disk_type" {
   type        = string
   description = "Type of template disk volume"
-  default     = "eager_zeroed"
+#  default     = "eager_zeroed"
+  default     = "thin"
 }
 
 variable "vm_1_root_disk_controller_type" {
